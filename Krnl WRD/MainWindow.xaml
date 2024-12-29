@@ -1,0 +1,57 @@
+﻿<Window x:Class="Krnl_WRD.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Krnl_WRD"
+        mc:Ignorable="d"
+        Title="MainWindow" 
+        Height="400" 
+        Width="650"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="NoResize"
+        Loaded="Window_Loaded">
+    <Grid>
+        <Border Name="MainBackground" Background="#121212" BorderBrush="Transparent" BorderThickness="0" SnapsToDevicePixels="True">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="28"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="152"/>
+                </Grid.ColumnDefinitions>
+                <Border Name="Topbar" Grid.ColumnSpan="2" MouseDown="Topbar_MouseDown" Background="#1D1D1D" BorderBrush="#1C62D1" BorderThickness="0,1.5,0,0" SnapsToDevicePixels="True">
+                    <Grid>
+                        <Image Source="./Logo/KrnlLogo.png" Height="20" Width="20" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0" SnapsToDevicePixels="True"/>
+                        <TextBlock Text="Krnl" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" SnapsToDevicePixels="True"/>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0" SnapsToDevicePixels="True">
+                            <Button Height="15" Width="15" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Margin="0,0,14,0" SnapsToDevicePixels="True">
+                                <Path Height="2" Width="10" Fill="White" Stretch="Fill" Data="M0 2V0H10V2H0Z" SnapsToDevicePixels="True"/>
+                            </Button>
+                            <Button Height="15" Width="15" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" SnapsToDevicePixels="True">
+                                <Path Height="10" Width="10" Fill="White" Stretch="Fill" Data="M1.33333 0L0 1.33333L3.66667 5L0 8.66667L1.33333 10L5 6.33333L8.66667 10L10 8.66667L6.33333 5L10 1.33333L8.66667 0L5 3.66667L1.33333 0Z" SnapsToDevicePixels="True"/>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border Grid.Row="1" Grid.ColumnSpan="2" Background="#212121" BorderBrush="Transparent" BorderThickness="0" SnapsToDevicePixels="True">
+                    <Menu Background="Transparent" VerticalAlignment="Center" SnapsToDevicePixels="True" Margin="5,0,0,0" HorizontalAlignment="Left">
+                        <MenuItem Header="File" Foreground="White" VerticalAlignment="Center" SnapsToDevicePixels="True"/>
+                        <MenuItem Header="Credits" Foreground="White" VerticalAlignment="Center" SnapsToDevicePixels="True"/>
+                        <MenuItem Header="Games" Foreground="White" VerticalAlignment="Center" SnapsToDevicePixels="True"/>
+                        <MenuItem Header="Hot-Scripts" Foreground="White" VerticalAlignment="Center" SnapsToDevicePixels="True"/>
+                        <MenuItem Header="Others" Foreground="White" VerticalAlignment="Center" SnapsToDevicePixels="True"/>
+                    </Menu>
+                </Border>
+                <TabControl Grid.Row="2" Margin="4,3,4,3" SnapsToDevicePixels="True"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
