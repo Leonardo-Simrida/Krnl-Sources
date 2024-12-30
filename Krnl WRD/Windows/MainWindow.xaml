@@ -33,14 +33,14 @@
                                 <RowDefinition x:Name="RowDefinition1" Height="*"/>
                             </Grid.RowDefinitions>
                             <Border Background="#2D2C31" BorderBrush="#232323" BorderThickness="1,1,1,0">
-                                <Grid>
+                                <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Stretch">
                                         <TabPanel x:Name="headerPanel" Background="Transparent" Grid.Column="0" IsItemsHost="true" Margin="2,2,2,0" Grid.Row="0" KeyboardNavigation.TabIndex="1" Panel.ZIndex="1"/>
-                                        <Button Name="AddTab" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" SnapsToDevicePixels="True">
+                                        <Button Name="AddTab" Click="AddTab_Click" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" SnapsToDevicePixels="True">
                                             <Path Data="M6 10H4V6H0V4H4V0H6V4H10V6H6V10Z" Fill="White" Stretch="Fill" Height="13" Width="13" SnapsToDevicePixels="True"/>
                                         </Button>
                                     </StackPanel>
-                                </Grid>
+                                </ScrollViewer>
                             </Border>
                             <Border x:Name="contentPanel" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Grid.Column="0" KeyboardNavigation.DirectionalNavigation="Contained" Grid.Row="1" KeyboardNavigation.TabIndex="2" KeyboardNavigation.TabNavigation="Local">
                                 <ContentPresenter x:Name="PART_SelectedContentHost" ContentSource="SelectedContent" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
@@ -67,7 +67,7 @@
                                         <Grid Margin="2,0,5,0">
                                             <ContentPresenter ContentSource="Header" VerticalAlignment="Center"/>
                                         </Grid>
-                                        <Button Name="CloseTab" Margin="0,0,5,0" Height="13" Width="13" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" SnapsToDevicePixels="True">
+                                        <Button Name="CloseTab" Click="CloseTab_Click" Margin="0,0,5,0" Height="13" Width="13" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" SnapsToDevicePixels="True">
                                             <Path Data="M1.33333 0L0 1.33333L3.66667 5L0 8.66667L1.33333 10L5 6.33333L8.66667 10L10 8.66667L6.33333 5L10 1.33333L8.66667 0L5 3.66667L1.33333 0Z" Fill="White" Height="10" Width="10" Stretch="Fill"/>
                                         </Button>
                                     </StackPanel>
@@ -97,10 +97,10 @@
                         <Image Source="/Logo/KrnlLogo.png" Height="20" Width="20" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0" SnapsToDevicePixels="True"/>
                         <TextBlock Text="Krnl" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" SnapsToDevicePixels="True"/>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0" SnapsToDevicePixels="True">
-                            <Button Height="15" Width="15" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Margin="0,0,14,0" SnapsToDevicePixels="True">
+                            <Button Name="MinimizeKrnl" Click="MinimizeKrnl_Click" Height="15" Width="15" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Margin="0,0,14,0" SnapsToDevicePixels="True">
                                 <Path Height="2" Width="10" Fill="White" Stretch="Fill" Data="M0 2V0H10V2H0Z" SnapsToDevicePixels="True"/>
                             </Button>
-                            <Button Height="15" Width="15" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" SnapsToDevicePixels="True">
+                            <Button Name="CloseKrnl" Click="CloseKrnl_Click" Height="15" Width="15" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" SnapsToDevicePixels="True">
                                 <Path Height="10" Width="10" Fill="White" Stretch="Fill" Data="M1.33333 0L0 1.33333L3.66667 5L0 8.66667L1.33333 10L5 6.33333L8.66667 10L10 8.66667L6.33333 5L10 1.33333L8.66667 0L5 3.66667L1.33333 0Z" SnapsToDevicePixels="True"/>
                             </Button>
                         </StackPanel>
@@ -117,26 +117,26 @@
                 </Border>
                 <TabControl Name="Tabs" Background="#232323" BorderBrush="Transparent" BorderThickness="0" Grid.Row="2" Margin="4,3,4,3" SnapsToDevicePixels="True">
                 </TabControl>
-                <ListBox Grid.Row="2" Grid.Column="1" Margin="0,3,4,3" Background="#232323" BorderBrush="Transparent" BorderThickness="0"/>
+                <ListBox Name="Scriptbox" SelectionChanged="Scriptbox_SelectionChanged" Foreground="White" Grid.Row="2" Grid.Column="1" Margin="0,3,4,3" Background="#232323" BorderBrush="Transparent" BorderThickness="0"/>
                 <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0">
-                    <Button Height="20" Width="Auto" Background="#242424" BorderBrush="Transparent" BorderThickness="0" Foreground="White">
+                    <Button Name="ExecuteBtn" Click="ExecuteBtn_Click" Height="20" Width="Auto" Background="#242424" BorderBrush="Transparent" BorderThickness="0" Foreground="White">
                         <TextBlock Text="EXECUTE" Padding="20,0,20,0"/>
                     </Button>
-                    <Button Height="20" Width="Auto" Background="#242424" BorderBrush="Transparent" BorderThickness="0" Foreground="White" Margin="3,0,0,0">
+                    <Button Name="ClearBtn" Click="ClearBtn_Click" Height="20" Width="Auto" Background="#242424" BorderBrush="Transparent" BorderThickness="0" Foreground="White" Margin="3,0,0,0">
                         <TextBlock Text="CLEAR" Padding="20,0,20,0"/>
                     </Button>
-                    <Button Height="20" Width="Auto" Background="#242424" BorderBrush="Transparent" BorderThickness="0" Foreground="White" Margin="3,0,0,0">
+                    <Button Name="OpenBtn" Click="OpenBtn_Click" Height="20" Width="Auto" Background="#242424" BorderBrush="Transparent" BorderThickness="0" Foreground="White" Margin="3,0,0,0">
                         <TextBlock Text="OPEN FILE" Padding="20,0,20,0"/>
                     </Button>
-                    <Button Height="20" Width="Auto" Background="#242424" BorderBrush="Transparent" BorderThickness="0" Foreground="White" Margin="3,0,0,0">
+                    <Button Name="SaveBtn" Click="SaveBtn_Click" Height="20" Width="Auto" Background="#242424" BorderBrush="Transparent" BorderThickness="0" Foreground="White" Margin="3,0,0,0">
                         <TextBlock Text="SAVE FILE" Padding="20,0,20,0"/>
                     </Button>
-                    <Button Height="20" Width="Auto" Background="#242424" BorderBrush="Transparent" BorderThickness="0" Foreground="White" Margin="3,0,0,0">
+                    <Button Name="InjectBtn" Click="InjectBtn_Click" Height="20" Width="Auto" Background="#242424" BorderBrush="Transparent" BorderThickness="0" Foreground="White" Margin="3,0,0,0">
                         <TextBlock Text="INJECT" Padding="20,0,20,0"/>
                     </Button>
                 </StackPanel>
                 <StackPanel Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0">
-                    <Button Height="20" Width="Auto" Background="#242424" BorderBrush="Transparent" BorderThickness="0" Foreground="White" Margin="3,0,0,0">
+                    <Button Name="OptionsBtn" Click="OptionsBtn_Click" Height="20" Width="Auto" Background="#242424" BorderBrush="Transparent" BorderThickness="0" Foreground="White" Margin="3,0,0,0">
                         <TextBlock Text="OPTIONS" Padding="20,0,20,0"/>
                     </Button>                    
                 </StackPanel>

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -23,6 +25,16 @@ namespace Krnl_WRD
         public MainWindow()
         {
             InitializeComponent();
+
+            foreach (FileInfo fileInfo1 in new DirectoryInfo("./scripts").GetFiles("*.txt"))
+            {
+                this.Scriptbox.Items.Add(fileInfo1.Name);
+            }
+
+            foreach (FileInfo fileInfo2 in new DirectoryInfo("./scripts").GetFiles("*.lua"))
+            {
+                this.Scriptbox.Items.Add(fileInfo2.Name);
+            }
         }
 
         private WebViewAPI GetViewAPI()
@@ -63,6 +75,89 @@ namespace Krnl_WRD
             {
                 DragMove();
             }
+        }
+
+        private void AddTab_Click(object sender, RoutedEventArgs e)
+        {
+            WebViewAPI webViewAPI = new WebViewAPI();
+            TabItem tabItem = new TabItem()
+            {
+                Header = "Script " + TabCount + ".lua" as string,
+                Height = 15,
+                Content = webViewAPI
+            };
+            Tabs.Items.Add(tabItem);
+            Tabs.SelectedItem = tabItem;
+            TabCount++;
+        }
+
+        private void CloseTab_Click(object sender, RoutedEventArgs e)
+        {
+            TabItem heheitem = (TabItem)Tabs.SelectedItem;
+            Tabs.Items.Remove(heheitem);
+            TabCount--;
+        }
+
+        private void CloseKrnl_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void MinimizeKrnl_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void ExecuteBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ClearBtn_Click(object sender, RoutedEventArgs e)
+        {
+            GetViewAPI().SetText("");
+        }
+
+        private void OpenBtn_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Multiselect = false;
+            openFileDialog.Title = "File Select";
+            openFileDialog.Filter = "Txt Files (*.txt)|*.txt|Lua Files (*.lua)|*.lua|All Files (*.*)|*.*";
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string text = File.ReadAllText(openFileDialog.FileName);
+                GetViewAPI().SetText(text);
+            }
+        }
+
+        private async void SaveBtn_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Title = "File Save";
+            saveFileDialog.Filter = "Txt Files (*.txt)|*.txt|Lua Files (*.lua)|*.lua|All Files (*.*)|*.*";
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                File.WriteAllText(contents: await GetViewAPI().GetText(), path: saveFileDialog.FileName);
+            }
+        }
+
+        private void InjectBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OptionsBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Scriptbox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string text = File.ReadAllText("./scripts/" + Scriptbox.SelectedItem);
+            GetViewAPI().SetText(text);
         }
     }
 }
