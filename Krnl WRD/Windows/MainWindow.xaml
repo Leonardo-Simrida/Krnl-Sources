@@ -14,6 +14,71 @@
         Background="Transparent"
         ResizeMode="NoResize"
         Loaded="Window_Loaded">
+    <Window.Resources>
+        <Style TargetType="TabControl">
+            <Setter Property="Padding" Value="2"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabControl}">
+                        <Grid x:Name="templateRoot" ClipToBounds="true" SnapsToDevicePixels="true" KeyboardNavigation.TabNavigation="Local">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Name="ColumnDefinition0"/>
+                                <ColumnDefinition x:Name="ColumnDefinition1" Width="0"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition x:Name="RowDefinition0" Height="Auto"/>
+                                <RowDefinition x:Name="RowDefinition1" Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Border Background="#2D2C31" BorderBrush="#232323" BorderThickness="1,1,1,0">
+                                <Grid>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Stretch">
+                                        <TabPanel x:Name="headerPanel" Background="Transparent" Grid.Column="0" IsItemsHost="true" Margin="2,2,2,0" Grid.Row="0" KeyboardNavigation.TabIndex="1" Panel.ZIndex="1"/>
+                                        <Button Name="AddTab" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" SnapsToDevicePixels="True">
+                                            <Path Data="M6 10H4V6H0V4H4V0H6V4H10V6H6V10Z" Fill="White" Stretch="Fill" Height="13" Width="13" SnapsToDevicePixels="True"/>
+                                        </Button>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                            <Border x:Name="contentPanel" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Grid.Column="0" KeyboardNavigation.DirectionalNavigation="Contained" Grid.Row="1" KeyboardNavigation.TabIndex="2" KeyboardNavigation.TabNavigation="Local">
+                                <ContentPresenter x:Name="PART_SelectedContentHost" ContentSource="SelectedContent" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="TabItem">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Padding" Value="6,2,6,2"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+                        <Grid x:Name="templateRoot" SnapsToDevicePixels="true">
+                            <Border x:Name="mainBorder" Background="#232323" BorderBrush="Transparent" BorderThickness="0,0,0,0" Margin="0">
+                                <Grid>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                                        <Grid Margin="2,0,5,0">
+                                            <ContentPresenter ContentSource="Header" VerticalAlignment="Center"/>
+                                        </Grid>
+                                        <Button Name="CloseTab" Margin="0,0,5,0" Height="13" Width="13" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" SnapsToDevicePixels="True">
+                                            <Path Data="M1.33333 0L0 1.33333L3.66667 5L0 8.66667L1.33333 10L5 6.33333L8.66667 10L10 8.66667L6.33333 5L10 1.33333L8.66667 0L5 3.66667L1.33333 0Z" Fill="White" Height="10" Width="10" Stretch="Fill"/>
+                                        </Button>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Border Name="MainBackground" Background="#121212" BorderBrush="Transparent" BorderThickness="0" SnapsToDevicePixels="True">
             <Grid>
@@ -29,7 +94,7 @@
                 </Grid.ColumnDefinitions>
                 <Border Name="Topbar" Grid.ColumnSpan="2" MouseDown="Topbar_MouseDown" Background="#1D1D1D" BorderBrush="#1C62D1" BorderThickness="0,1.5,0,0" SnapsToDevicePixels="True">
                     <Grid>
-                        <Image Source="./Logo/KrnlLogo.png" Height="20" Width="20" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0" SnapsToDevicePixels="True"/>
+                        <Image Source="/Logo/KrnlLogo.png" Height="20" Width="20" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0" SnapsToDevicePixels="True"/>
                         <TextBlock Text="Krnl" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" SnapsToDevicePixels="True"/>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0" SnapsToDevicePixels="True">
                             <Button Height="15" Width="15" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Margin="0,0,14,0" SnapsToDevicePixels="True">
@@ -50,7 +115,31 @@
                         <MenuItem Header="Others" Foreground="White" VerticalAlignment="Center" SnapsToDevicePixels="True"/>
                     </Menu>
                 </Border>
-                <TabControl Grid.Row="2" Margin="4,3,4,3" SnapsToDevicePixels="True"/>
+                <TabControl Name="Tabs" Background="#232323" BorderBrush="Transparent" BorderThickness="0" Grid.Row="2" Margin="4,3,4,3" SnapsToDevicePixels="True">
+                </TabControl>
+                <ListBox Grid.Row="2" Grid.Column="1" Margin="0,3,4,3" Background="#232323" BorderBrush="Transparent" BorderThickness="0"/>
+                <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0">
+                    <Button Height="20" Width="Auto" Background="#242424" BorderBrush="Transparent" BorderThickness="0" Foreground="White">
+                        <TextBlock Text="EXECUTE" Padding="20,0,20,0"/>
+                    </Button>
+                    <Button Height="20" Width="Auto" Background="#242424" BorderBrush="Transparent" BorderThickness="0" Foreground="White" Margin="3,0,0,0">
+                        <TextBlock Text="CLEAR" Padding="20,0,20,0"/>
+                    </Button>
+                    <Button Height="20" Width="Auto" Background="#242424" BorderBrush="Transparent" BorderThickness="0" Foreground="White" Margin="3,0,0,0">
+                        <TextBlock Text="OPEN FILE" Padding="20,0,20,0"/>
+                    </Button>
+                    <Button Height="20" Width="Auto" Background="#242424" BorderBrush="Transparent" BorderThickness="0" Foreground="White" Margin="3,0,0,0">
+                        <TextBlock Text="SAVE FILE" Padding="20,0,20,0"/>
+                    </Button>
+                    <Button Height="20" Width="Auto" Background="#242424" BorderBrush="Transparent" BorderThickness="0" Foreground="White" Margin="3,0,0,0">
+                        <TextBlock Text="INJECT" Padding="20,0,20,0"/>
+                    </Button>
+                </StackPanel>
+                <StackPanel Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0">
+                    <Button Height="20" Width="Auto" Background="#242424" BorderBrush="Transparent" BorderThickness="0" Foreground="White" Margin="3,0,0,0">
+                        <TextBlock Text="OPTIONS" Padding="20,0,20,0"/>
+                    </Button>                    
+                </StackPanel>
             </Grid>
         </Border>
     </Grid>
