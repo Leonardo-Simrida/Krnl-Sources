@@ -111,7 +111,15 @@
                         <MenuItem Header="File" Foreground="White" VerticalAlignment="Center" SnapsToDevicePixels="True"/>
                         <MenuItem Header="Credits" Foreground="White" VerticalAlignment="Center" SnapsToDevicePixels="True"/>
                         <MenuItem Header="Games" Foreground="White" VerticalAlignment="Center" SnapsToDevicePixels="True"/>
-                        <MenuItem Header="Hot-Scripts" Foreground="White" VerticalAlignment="Center" SnapsToDevicePixels="True"/>
+                        <MenuItem Header="Hot-Scripts" Foreground="White" VerticalAlignment="Center" SnapsToDevicePixels="True">
+                            <MenuItem Header="DarkDex"/>
+                            <MenuItem Header="OpenGui"/>
+                            <MenuItem Header="Owl Hub"/>
+                            <MenuItem Header="Krnl Hub"/>
+                            <MenuItem Header="Remote Spy"/>
+                            <MenuItem Header="Game Sense"/>
+                            <MenuItem Header="Unnamed ESP"/>
+                        </MenuItem>
                         <MenuItem Header="Others" Foreground="White" VerticalAlignment="Center" SnapsToDevicePixels="True"/>
                     </Menu>
                 </Border>
@@ -138,7 +146,7 @@
                 <StackPanel Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0">
                     <Button Name="OptionsBtn" Click="OptionsBtn_Click" Height="20" Width="Auto" Background="#242424" BorderBrush="Transparent" BorderThickness="0" Foreground="White" Margin="3,0,0,0">
                         <TextBlock Text="OPTIONS" Padding="20,0,20,0"/>
-                    </Button>                    
+                    </Button>
                 </StackPanel>
             </Grid>
         </Border>
